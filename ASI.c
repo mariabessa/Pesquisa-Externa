@@ -1,6 +1,6 @@
 #include "ASI.h"
 #include <stdio.h>
-
+//joao esteve aqui
 
 void ASI(FILE * arq, item itemProcurado){
     int contador = 0;
