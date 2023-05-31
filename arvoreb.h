@@ -1,6 +1,11 @@
 #ifndef arvoreb_h
 #define arvoreb_h
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #define MM 4
+#define M 2
 
 typedef long TipoChave;
 
@@ -17,7 +22,7 @@ typedef struct TipoPagina {
 } TipoPagina;
 
 //Pesquisa
-void Pesquisa (TipoRegistro, TipoApontador);
+void Pesquisa (TipoRegistro*, TipoApontador);
 
 //Caminhamento
 void Imprime (TipoApontador);
@@ -25,7 +30,7 @@ void Imprime (TipoApontador);
 //Inserção
 void InsereNaPagina (TipoApontador, TipoRegistro, TipoApontador);
 void Ins(TipoRegistro, TipoApontador, short*, TipoRegistro, TipoApontador);
-void Insere(TipoRegistro, TipoApontador);
+void Insere(TipoRegistro, TipoApontador*);
 
 
 //Remoção

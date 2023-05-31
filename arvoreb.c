@@ -1,6 +1,4 @@
 #include "arvoreb.h"
-#include <stdio.h>
-
 
 // Inicialização: Arvore B
 
@@ -10,7 +8,7 @@ void Inicializa (TipoApontador Arvore) {
 
 // Pesquisa: Arvore B
 
-void Pesquisa (TipoRegistro *x, TipoApontador Ap){
+void Pesquisa(TipoRegistro *x, TipoApontador Ap){
     long i = 1;
     if (Ap == NULL) {
         printf("Tipo Registro não esta presente na árvore\n");
@@ -103,7 +101,7 @@ void Ins(TipoRegistro Reg, TipoApontador Ap, short* Cresceu, TipoRegistro *RegRe
 
     //Overflow: Pagina tem que ser dividida
     ApTemp = (TipoApontador)malloc(sizeof(TipoPagina));
-    Aptemp->n = 0;
+    ApTemp->n = 0;
     ApTemp->p[0] = NULL;
     
     if(i<M+1){
@@ -124,7 +122,7 @@ void Ins(TipoRegistro Reg, TipoApontador Ap, short* Cresceu, TipoRegistro *RegRe
 void Insere(TipoRegistro Reg, TipoApontador *Ap) {
     short Cresceu;
     TipoRegistro RegRetorno;
-    TipoPagina *ApRetorno, *Aptemp;
+    TipoPagina *ApRetorno, *ApTemp;
 
     Ins(Reg, *Ap, &Cresceu, &RegRetorno, &ApRetorno);
     
