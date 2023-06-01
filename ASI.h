@@ -9,7 +9,7 @@ typedef struct{
     char dado3[5000];
 }item;
 
-void ASI(FILE * arq, item itemProcurado);
+int tabelaDeIndices(FILE *);
 int pesquisa(int*, int, int, item *, FILE *);
 
 # endif

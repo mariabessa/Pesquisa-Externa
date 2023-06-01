@@ -1,10 +1,15 @@
-#include "ASI.h"
-#include <stdio.h>
-//joao esteve aqui e bessa tb
 
-void ASI(FILE * arq, item itemProcurado){
+#include "acessoIndexado.h"
+
+
+int tabelaDeIndices(FILE *arq){
     int contador = 0;
     float tamanhoTabela;
+    item itemProcurado;
+    if((arq = fopen("arquivoBin.bin", "rb")) == NULL){
+        printf("Erro ao abrir o arquivo\n");
+        return 0;
+    }
     // verificar o número total de itens do arquivo
     fseek(arq, 0, SEEK_END);
     int totalItens = ftell(arq)/ sizeof(item);
@@ -12,7 +17,7 @@ void ASI(FILE * arq, item itemProcurado){
     if (totalItens % ITENSPORPAGINA != 0){
         tamanhoTabela++;
     }
-    int tabela[(int)tamanhoTabela];
+    int tabela[tamanhoTabela];
     item x[ITENSPORPAGINA];
     rewind(arq);
     // cria o vetor de indices
@@ -20,8 +25,13 @@ void ASI(FILE * arq, item itemProcurado){
         tabela[contador] = x[0].chave;
         contador++;
     }
-    pesquisa(tabela, totalItens, tamanhoTabela, &itemProcurado, arq); 
-    return;
+    printf("Qual a chave do indice deseja buscar?\n");
+    scanf("%d", &itemProcurado.chave);
+    if (pesquisa(tabela, totalItens, tamanhoTabela, &itemProcurado, arq)) 
+        printf("Item: %s \nDado1: R$%s\n", itemProcurado.chave, itemProcurado.dado1);
+    else printf("O livro não está no arquivo\n");
+    fclose(arq);
+    return 0;
 }
 
 int pesquisa(int tabela[], int totalItens, int tamanhoTabela, item *itemProcurado, FILE * arq){
@@ -40,7 +50,7 @@ int pesquisa(int tabela[], int totalItens, int tamanhoTabela, item *itemProcurad
     fseek(arq, desloc, 0);
     fread(&pagina, sizeof(item), quantidade, arq);
     // procura o item na página
-    for(i = 0; i < quantidade; i++){
+        for(i = 0; i < quantidade; i++){
         if (pagina[i].chave == itemProcurado->chave){
             *itemProcurado = pagina[i];
             return 1;
