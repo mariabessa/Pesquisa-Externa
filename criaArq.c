@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "acessoIndexado.h"
+#include "ASI.h"
 
 #define TAMARQUIVO 1000
 
@@ -17,8 +17,7 @@ char* generateRandomString(int tam) {
     return dado;
 }
 
-int main()
-{
+void arquivo(){
     FILE *arquivo;
     FILE *arquivoBin;
     Item item;
@@ -29,13 +28,13 @@ int main()
     // /*
     if((arquivo = fopen("arquivo.txt", "w")) == NULL) {
         puts("Arquivo nao pode ser aberto...");
-        return 0;
+        return;
     }
     // */
 
     if((arquivoBin = fopen("arquivo.bin", "wb+")) == NULL) {
         puts("Arquivo nao pode ser aberto...");
-        return 0;
+        return;
     }
     
     while (chave < TAMARQUIVO)
@@ -55,6 +54,4 @@ int main()
     
     fclose(arquivo);
     fclose(arquivoBin);
-
-    return 0;
 }

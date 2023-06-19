@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "acessoIndexado.h"
+#include "ASI.h"
+#include "criaArq.h"
 #include "arvoreb.h"
 
 
@@ -8,7 +9,7 @@ int main(int argc, char **argv)
 {
     int opcode;
     opcode = atoi(argv[0]);
-
+    arquivo();
     /*  argv[0] = método - acesso sequencial, binario, arvore b, arvore b estrela
         argv[1] = quantidade de registros
         argv[2] = situação (ordenado descententemente, ascendentemente ou desordenado aleatoriamente)
@@ -21,75 +22,41 @@ int main(int argc, char **argv)
         printf("Número de argumentos inválido. As entradas são: <método> <quantidade> <situação> <chave> [-P](opcional)");
 
     // PESQUISA DE ACESSO INDEXADO:
-    if (argv[0] == 1) { 
-        FILE *arquivo;
-
-        Item item;
-        Tabela tabela[MAXTABELA];
-
-        char chave[5], dado1[10], dado2[1000], dado3[5000];
-        int cont = 0, pos = 0;
-
-        if((arquivo = fopen("arquivo.txt", "r")) == NULL) {
-            printf("Erro na abertura do arquivo.\n");
-            return 0;
-        }
-        
-        while (fscanf(arquivo, "%s", chave) != -1)
-        {
-            strcpy(tabela[pos].chave, chave);
-            tabela[pos].posicao = ++pos;
-            
-            fscanf(arquivo, "%s", dado1);
-            fscanf(arquivo, "%s", dado2);
-            fscanf(arquivo, "%s", dado3);
-            
-            fseek(arquivo, (sizeof(Item) + 2) * 3, SEEK_CUR);
-        }
-
-        // strcpy(item.chave, "00000");
-        // strcpy(item.chave, "00007");
-        // strcpy(item.chave, "00995");
-        // strcpy(item.chave, "00996");
-        strcpy(item.chave, "00999");
-        // strcpy(item.chave, "03999");
-
-        if(pesquisa(tabela, pos, &item, arquivo))
-            printf("Codigo: %s; Dado 1: %s\n", item.chave, item.dado1);
-        else
-            printf("Chave não foi indentificada.\n");
-        
-        fclose(arquivo);
+    if (opcode == 1)  { 
+        Item itemProcurado;
+        printf("Qual a chave do indice deseja buscar?\n");
+        scanf("%d", &itemProcurado.chave);
+        tabelaDeIndices(&itemProcurado);
         return 0;
     }
 
-    else if (argv[0] == 3) {
-        TipoApontador* arvoreb = (TipoApontador*) malloc (sizeof(TipoApontador*));
-        TipoRegistro* registro = (TipoRegistro*) malloc (sizeof(TipoRegistro*));
-        FILE* arquivo;
+    else if (opcode == 3)  {
+        // TipoApontador* arvoreb = (TipoApontador*) malloc (sizeof(TipoApontador*));
+        // TipoRegistro* registro = (TipoRegistro*) malloc (sizeof(TipoRegistro*));
+        // FILE* arquivo;
 
-        arquivo = fopen("arquivo.bin", "rb");
+        // arquivo = fopen("arquivo.bin", "rb");
 
-        //Inicialização
-        InicializaArvore(arvoreb);
+        // //Inicialização
+        // InicializaArvore(arvoreb);
 
-        //Inserção
-        for (int i=0; i<argv[1]; i++){
-            fscanf("%d %ld %s %s")
+        // //Inserção
+        // for (int i=0; i<argv[1]; i++){
+        //     fscanf("%d %ld %s %s")
 
-            Insere(arvoreb)
-        }
+        //     Insere(arvoreb)
+        // }
 
-        //tipo de ordenação
+        // //tipo de ordenação
 
-        //pesquisa
-        Pesquisa(registro, arvoreb);
+        // //pesquisa
+        // Pesquisa(registro, arvoreb);
 
-        if (argc==5){ //Usuario digitou -P
-            printf("")
-        }
+        // if (argc==5){ //Usuario digitou -P
+        //     printf("")
+        // }
 
-        free(arvoreb);
-        free(registro);   
+        // free(arvoreb);
+        // free(registro);   
     }
 }

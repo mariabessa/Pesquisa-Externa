@@ -12,8 +12,8 @@ typedef long TipoChave;
 typedef struct TipoRegistro {
     TipoChave Chave;
 
-    chave (valor inteiro), dado1 (valor inteiro longo), dado2 (cadeia de 1000
-caracteres), dado3 (cadeia de 5000 caracteres). N
+//     chave (valor inteiro), dado1 (valor inteiro longo), dado2 (cadeia de 1000
+// caracteres), dado3 (cadeia de 5000 caracteres). N
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;
