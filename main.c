@@ -8,7 +8,9 @@
 int main(int argc, char **argv)
 {
     int opcode;
-    opcode = atoi(argv[0]);
+    Item itemProcurado;
+    opcode = atoi(argv[1]);
+    itemProcurado.chave = atoi(argv[3]);
     arquivo();
     /*  argv[0] = método - acesso sequencial, binario, arvore b, arvore b estrela
         argv[1] = quantidade de registros
@@ -18,15 +20,13 @@ int main(int argc, char **argv)
     */
  
     //Número de argumentos inválido
-    if (argc!=4 && argc!=5) 
-        printf("Número de argumentos inválido. As entradas são: <método> <quantidade> <situação> <chave> [-P](opcional)");
-
+    if (argc!=5 && argc!=6) 
+        printf("Número de argumentos inválido. As entradas são: <método> <quantidade> <situação> <chave> [-P](opcional)\n");
     // PESQUISA DE ACESSO INDEXADO:
-    if (opcode == 1)  { 
-        Item itemProcurado;
-        printf("Qual a chave do indice deseja buscar?\n");
-        scanf("%d", &itemProcurado.chave);
-        tabelaDeIndices(&itemProcurado);
+    else if (opcode == 1)  { 
+        if(acessoSequencialIndexado(&itemProcurado))
+            printf("Item: %d \nDado1: %ld\n", itemProcurado.chave, itemProcurado.dado1);
+        else printf("O livro não está no arquivo\n");
         return 0;
     }
 

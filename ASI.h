@@ -11,7 +11,7 @@ typedef struct{
     char dado3[5000];
 }Item;
 
-int tabelaDeIndices(Item *);
+int acessoSequencialIndexado(Item *);
 int pesquisa(int*, int, int, Item *, FILE *);
 
 # endif

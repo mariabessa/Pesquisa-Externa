@@ -1,7 +1,7 @@
 #include "ASI.h"
 
 
-int tabelaDeIndices( Item *itemProcurado){
+int acessoSequencialIndexado( Item *itemProcurado){
     FILE *arq;
     int contador = 0;
     float tamanhoTabela;
@@ -24,9 +24,7 @@ int tabelaDeIndices( Item *itemProcurado){
         tabela[contador] = x[0].chave;
         contador++;
     }
-    if (pesquisa(tabela, totalItens, tamanhoTabela, itemProcurado, arq)) 
-        printf("Item: %d \nDado1: R$%ld\n", itemProcurado->chave, itemProcurado->dado1);
-    else printf("O livro não está no arquivo\n");
+    return (pesquisa(tabela, totalItens, tamanhoTabela, itemProcurado, arq));
     fclose(arq);
     return 0;
 }
