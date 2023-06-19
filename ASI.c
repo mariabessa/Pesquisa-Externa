@@ -1,14 +1,9 @@
 #include "ASI.h"
 
 
-int acessoSequencialIndexado( Item *itemProcurado){
-    FILE *arq;
+int acessoSequencialIndexado( Item *itemProcurado, FILE * arq){
     int contador = 0;
     float tamanhoTabela;
-    if((arq = fopen("arquivo.bin", "rb")) == NULL){
-        printf("Erro ao abrir o arquivo\n");
-        return 0;
-    }
     // verificar o número total de itens do arquivo
     fseek(arq, 0, SEEK_END);
     int totalItens = ftell(arq)/ sizeof(Item);

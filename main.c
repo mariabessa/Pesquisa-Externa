@@ -18,13 +18,17 @@ int main(int argc, char **argv)
         argv[3] = chave a ser pesquisada
         argv[4](opcional) = [-P] colocado caso deseja que as chaves de pesquisa dos registros do arquivo considerado sejam apresentadas na tela
     */
- 
+    FILE *arq;
+    if((arq = fopen("arquivo.bin", "rb")) == NULL){
+        printf("Erro ao abrir o arquivo\n");
+        return 0;
+    }
     //Número de argumentos inválido
     if (argc!=5 && argc!=6) 
         printf("Número de argumentos inválido. As entradas são: <método> <quantidade> <situação> <chave> [-P](opcional)\n");
     // PESQUISA DE ACESSO INDEXADO:
     else if (opcode == 1)  { 
-        if(acessoSequencialIndexado(&itemProcurado))
+        if(acessoSequencialIndexado(&itemProcurado, arq))
             printf("Item: %d \nDado1: %ld\n", itemProcurado.chave, itemProcurado.dado1);
         else printf("O livro não está no arquivo\n");
         return 0;
