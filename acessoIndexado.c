@@ -23,24 +23,13 @@ int pesquisa(Tabela tabela[], int tam, Item* item, FILE *arquivo) {
     desloc = (tabela[i].posicao-1)*ITENSPAGINA*(sizeof(Item) + 2);
     fseek (arquivo, desloc, SEEK_SET);
 
-    for(int i = 0; i <= quantItens; i++) {
-        char chave[5], dado1[10], dado2[1000], dado3[5000];
-        
-        fscanf(arquivo, "%s", chave);
-        strcpy(pagina[i].chave, chave);
-
-        fscanf(arquivo, "%s", dado1);
-        // strcpy(pagina[i].dado1, dado1);
-        
-        fscanf(arquivo, "%s", dado2);
-        // strcpy(pagina[i].dado2, dado2);
-        
-        fscanf(arquivo, "%s", dado3);
-        // strcpy(pagina[i].dado3, dado3);
+    for(int i = 0; i < quantItens; i++) {
+        fread(&pagina[i], sizeof(Item), 1, arquivoBin);
+        printf("%d\n", pagina[i].chave);
     }
 
     for (i = 0; i < quantItens; i++)
-        if(strcmp(pagina[i].chave, item->chave) == 0) {
+        if(pagina[i].chave == item->chave) {
             *item = pagina[i];
             return 1;
         }

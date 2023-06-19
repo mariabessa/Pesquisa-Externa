@@ -1,5 +1,6 @@
 # ifndef ASI_h
 # define ASI_h
+#include <stdio.h>
 #define ITENSPORPAGINA 2
 
 typedef struct{

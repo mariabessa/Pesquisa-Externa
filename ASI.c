@@ -1,5 +1,4 @@
-
-#include "acessoIndexado.h"
+#include "ASI.h"
 
 
 int tabelaDeIndices(FILE *arq){

@@ -18,6 +18,7 @@ void Pesquisa(TipoRegistro *x, TipoApontador Ap){
     while (i < Ap->n && x->Chave > Ap->r[i-1].Chave) i++; // Pesquisa sequencial para se encontrar o intervalo desejado 
 
     if (x->Chave == Ap->r[i-1].Chave) {
+        printf("\nchave encontrada!\n");
         *x = Ap->r[i-1];
         return;
     }
@@ -127,7 +128,7 @@ void Insere(TipoRegistro Reg, TipoApontador *Ap) {
     Ins(Reg, *Ap, &Cresceu, &RegRetorno, &ApRetorno);
     
     if(Cresceu) { //Arvore cresce na altura pela raiz
-        ApTemp = (TipoPagina *) malloc (sizeof(TipoPagina));
+        ApTemp = (TipoPagina*) malloc (sizeof(TipoPagina));
         ApTemp->n = 1;
         ApTemp->r[0] = RegRetorno;
         ApTemp->p[1] = ApRetorno;
@@ -269,4 +270,3 @@ void Retira (TipoChave Ch, TipoApontador *Ap) {
         free(Aux);
     }
 }
-

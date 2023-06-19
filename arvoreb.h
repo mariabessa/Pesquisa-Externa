@@ -11,6 +11,9 @@ typedef long TipoChave;
 
 typedef struct TipoRegistro {
     TipoChave Chave;
+
+    chave (valor inteiro), dado1 (valor inteiro longo), dado2 (cadeia de 1000
+caracteres), dado3 (cadeia de 5000 caracteres). N
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;
@@ -20,6 +23,11 @@ typedef struct TipoPagina {
     TipoRegistro r[MM];
     TipoApontador p[MM +1];
 } TipoPagina;
+
+//Inicializar
+void InicializaArvore(TipoApontador* arvore){
+    arvore = NULL;
+}
 
 //Pesquisa
 void Pesquisa (TipoRegistro*, TipoApontador);
@@ -36,7 +44,7 @@ void Insere(TipoRegistro, TipoApontador*);
 //Remoção
 void Reconstitui (TipoApontador, TipoApontador, int, short*);
 void Antecessor (TipoApontador, int, TipoApontador, short*);
-void Ret(TipoChave, TipoApontador, short*);
-void Retira (TipoChave, TipoApontador);
+void Ret(TipoChave, TipoApontador*, short*);
+void Retira (TipoChave, TipoApontador*);
 
 #endif 

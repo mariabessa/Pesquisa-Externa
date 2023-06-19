@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include "acessoIndexado.h"
+#include "arvoreb.h"
+
 
 int main(int argc, char **argv)
 {
     int opcode;
     opcode = atoi(argv[0]);
 
-    /*  argv[0] = método
+    /*  argv[0] = método - acesso sequencial, binario, arvore b, arvore b estrela
         argv[1] = quantidade de registros
         argv[2] = situação (ordenado descententemente, ascendentemente ou desordenado aleatoriamente)
         argv[3] = chave a ser pesquisada
@@ -61,5 +63,33 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    
+    else if (argv[0] == 3) {
+        TipoApontador* arvoreb = (TipoApontador*) malloc (sizeof(TipoApontador*));
+        TipoRegistro* registro = (TipoRegistro*) malloc (sizeof(TipoRegistro*));
+        FILE* arquivo;
+
+        arquivo = fopen("arquivo.bin", "rb");
+
+        //Inicialização
+        InicializaArvore(arvoreb);
+
+        //Inserção
+        for (int i=0; i<argv[1]; i++){
+            fscanf("%d %ld %s %s")
+
+            Insere(arvoreb)
+        }
+
+        //tipo de ordenação
+
+        //pesquisa
+        Pesquisa(registro, arvoreb);
+
+        if (argc==5){ //Usuario digitou -P
+            printf("")
+        }
+
+        free(arvoreb);
+        free(registro);   
+    }
 }
