@@ -7,16 +7,17 @@
 
 int main(int argc, char **argv)
 {
-    int opcode;
+    int opcode, quantReg;
     Item itemProcurado;
     opcode = atoi(argv[1]);
-    itemProcurado.chave = atoi(argv[3]);
+    quantReg = atoi(argv[2]);
+    itemProcurado.chave = atoi(argv[4]);
     arquivo();
-    /*  argv[0] = método - acesso sequencial, binario, arvore b, arvore b estrela
-        argv[1] = quantidade de registros
-        argv[2] = situação (ordenado descententemente, ascendentemente ou desordenado aleatoriamente)
-        argv[3] = chave a ser pesquisada
-        argv[4](opcional) = [-P] colocado caso deseja que as chaves de pesquisa dos registros do arquivo considerado sejam apresentadas na tela
+    /*  argv[1] = método - acesso sequencial, binario, arvore b, arvore b estrela
+        argv[2] = quantidade de registros
+        argv[3] = situação (ordenado descententemente, ascendentemente ou desordenado aleatoriamente)
+        argv[4] = chave a ser pesquisada
+        argv[5](opcional) = [-P] colocado caso deseja que as chaves de pesquisa dos registros do arquivo considerado sejam apresentadas na tela
     */
     FILE *arq;
     if((arq = fopen("arquivo.bin", "rb")) == NULL){
@@ -35,31 +36,39 @@ int main(int argc, char **argv)
     }
 
     else if (opcode == 3)  {
-        TipoApontador* arvoreb = (TipoApontador*) malloc (sizeof(TipoApontador*));
-        TipoRegistro* registro = (TipoRegistro*) malloc (sizeof(TipoRegistro*));
+        TipoApontador* Ap = (TipoApontador*) malloc (sizeof(TipoApontador*));
+        TipoRegistro* Reg = (TipoRegistro*) malloc (sizeof(TipoRegistro*));
         FILE* arquivo;
 
         arquivo = fopen("arquivo.bin", "rb");
 
-        //Inicialização
-        Inicializa(*arvoreb);
+        printf("1\n\n");
 
+        //Inicialização
+        Inicializa(*Ap);
+
+        printf("2\n\n");
+        
         //Inserção
-        for (int i = 0; i < argv[2]; i++){
-            fscanf("%d %ld %s %s", arquivo);
-            Insere(*registro, arvoreb);
+        for (int i = 0; i < quantReg; i++){
+            fread(Reg, sizeof(Reg), 1, arquivo);
+            printf("1");
+            Insere(*Reg, Ap);
         }
+
+        printf("3\n\n");
 
         //Tipo de ordenação
 
         //Pesquisa
-        Pesquisa(registro, *arvoreb);
+        Pesquisa(Reg, *Ap);
+        
+        printf("4\n\n");
 
         if (argc==5){ //Usuario digitou -P
              printf(" ");
         }
 
-        free(arvoreb);
-        free(registro);   
+        free(Ap);
     }
 }
