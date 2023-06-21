@@ -42,17 +42,12 @@ int main(int argc, char **argv)
 
         arquivo = fopen("arquivo.bin", "rb");
 
-        printf("1\n\n");
-
         //Inicialização
         Inicializa(*Ap);
-
-        printf("2\n\n");
-        
+       
         //Inserção
         for (int i = 0; i < quantReg; i++){
             fread(Reg, sizeof(Reg), 1, arquivo);
-            printf("1");
             Insere(*Reg, Ap);
         }
 

@@ -55,10 +55,12 @@ void InsereNaPagina (TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir) {
     short NaoAchouPosicao;
     int k;
 
-    k = Ap->n;
+    k = Ap->n;      //ERROOOOOOOOOOOOOOOOOOOOOOOOOOO
+
     NaoAchouPosicao = (k>0);
 
     while (NaoAchouPosicao) {
+
         if (Reg.Chave >= Ap->r[k-1].Chave) {
             NaoAchouPosicao = false;
             break;
@@ -68,8 +70,10 @@ void InsereNaPagina (TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir) {
         Ap->p[k+1] = Ap->p[k];
         k--;
 
-        if(k<1) 
+        if(k<1){ 
             NaoAchouPosicao = false;
+        }
+
     }
 
     Ap->r[k] = Reg;
@@ -82,9 +86,12 @@ void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRe
     long j;
     TipoApontador ApTemp;
 
+
     if(Ap == NULL) {
+
         *Cresceu = true;
-        (*RegRetorno) = Reg; (*ApRetorno) = NULL;
+        (*RegRetorno) = Reg; 
+        (*ApRetorno) = NULL;
         return;
     }
 
