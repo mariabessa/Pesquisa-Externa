@@ -22,33 +22,31 @@ TipoApontador Inicializa (){
 
 // Pesquisa: Arvore B
 
-void Pesquisa(TipoRegistro *x, TipoApontador Ap){
-    long i = 1;
-    if (Ap == NULL) {
-        printf("Tipo Registro não esta presente na árvore\n");
+void Pesquisa(TipoRegistro *x, TipoApontador *Ap){
+    int i;
+    TipoApontador Pag;
+    Pag = *Ap;
+
+    if((*Ap)->Pt == Interna){
+        i = 1;
+        while(i < Pag->UU.U0.ni && x->chave > Pag->UU.U0.ri[i-1])
+            i++;
+        if(x->chave < Pag->UU.U0.ri[i-1])
+            Pesquisa(x, &Pag->UU.U0.pi[i-1]);
+            
+            else
+                Pesquisa(x, &Pag->UU.U0.pi[i]);
         return;
     }
+    i = 1;
 
+    while(i < Pag->UU.U1.ne && x->chave > Pag->UU.U1.re[i-1].chave)
+        i++;
+    if(x->chave == Pag->UU.U1.re[i-1].chave)
+        *x = Pag->UU.U1.re[i-1];
 
-    while (i < Ap->n && x->chave > Ap->r[i-1].chave) {
-
-        i++; // Pesquisa sequencial para se encontrar o intervalo desejado 
-    }
-
-    if (x->chave == Ap->r[i-1].chave) {
-        printf("\nchave encontrada!\n");
-        *x = Ap->r[i-1];
-        printf("Chave esperada:%d Chave encontrada:%d Dado1:%ld\n\n\n", x->chave, Ap->r[i-1].chave, x->dado1);
-        return;
-    }
-
-    if (x->chave < Ap->r[i-1].chave){
-        Pesquisa(x, Ap->p[i-1]); // Ativação recursiva da Pesquisa em uma das subárvores (esquerda ou direita)
-    }
-
-    else{
-        Pesquisa (x, Ap->p[i]);
-    }
+        else
+            printf("TipoRegistro nao esta presente na arvore\n");
 }
 
 // Caminhamento: Arvore B

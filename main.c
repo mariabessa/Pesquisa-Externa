@@ -34,8 +34,42 @@ int main(int argc, char **argv)
         else printf("O livro não está no arquivo\n");
         return 0;
     }
+    
+    //*********************************************************ARVORE B****************************************************************//
 
     else if (opcode == 3)  {
+
+        TipoRegistro Reg;
+        TipoRegistro* itemProcuradoB = (TipoRegistro*) malloc (sizeof(TipoRegistro*));
+
+        itemProcuradoB->chave = atoi(argv[4]);
+
+        //Inicialização
+        TipoApontador Arvoreb = Inicializa();
+
+        //Inserção
+        for (int i = 0; i < quantReg; i++){
+            fread(&Reg, sizeof(Reg), 1, arq);
+            Insere(Reg, &Arvoreb);
+
+        }
+
+
+        //Tipo de ordenação
+
+        //Pesquisa
+        Pesquisa(itemProcuradoB, Arvoreb);
+        
+
+        if (argc==5){ //Usuario digitou -P
+        }
+
+        free(Arvoreb);
+    }
+
+    //*********************************************************ARVORE B* *************************************************************//
+
+     else if (opcode == 4)  {
 
         TipoRegistro Reg;
         TipoRegistro* itemProcuradoB = (TipoRegistro*) malloc (sizeof(TipoRegistro*));

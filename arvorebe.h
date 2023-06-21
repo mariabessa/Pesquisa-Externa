@@ -16,12 +16,23 @@ typedef struct TipoRegistro {
     char dado3[5000];    //cadeia de 5000 caractere 
 } TipoRegistro;
 
+typedef enum {Interna, Externa} TipoIntExt;
+
 typedef struct TipoPagina* TipoApontador;
 
 typedef struct TipoPagina {
-    short n;
-    TipoRegistro r[MM];
-    TipoApontador p[MM +1];
+   TipoIntExt Pt;
+   union{
+        struct {
+            int ni;
+            int ri[MM];
+            TipoApontador pi[MM + 1];
+        } U0;
+        struct{
+            int ne;
+            TipoRegistro re[MM2].
+        } U1;
+   } UU;
 } TipoPagina;
 
 //Inicializar
@@ -29,7 +40,7 @@ TipoApontador Inicializa ();
 
 
 //Pesquisa
-void Pesquisa (TipoRegistro*, TipoApontador);
+void Pesquisa (TipoRegistro*, TipoApontador*);
 
 //Caminhamento
 void Imprime (TipoApontador);
