@@ -40,8 +40,8 @@ void arquivo(){
     while (chave < TAMARQUIVO)
     {
         dado1 = rand();
-        dado2 = generateRandomString(1000);
-        dado3 = generateRandomString(5000);
+        dado2 = generateRandomString(10);
+        dado3 = generateRandomString(50);
         
         item.chave = chave++;
         item.dado1 = dado1;

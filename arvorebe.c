@@ -2,15 +2,16 @@
 
 // Inicialização: Arvore B
 
-TipoApontador Inicializa (){
+TipoApontador InicializaBE (){
     TipoApontador raiz = (TipoApontador)malloc(sizeof(TipoPagina));
     raiz->n = 0;
+    raiz->Pagina->ni = 0;
     
     for (int i = 0; i < MM; i++) {
-        raiz->r[i].chave = -1;
-        raiz->r[i].dado1 = -1;
-        raiz->r[i].dado2[0] = '\0';
-        raiz->r[i].dado3[0] = '\0';
+        raiz->Pagina->ri[i].chave = -1;
+        raiz->Pagina->ri[i].dado1 = -1;
+        raiz->Pagina->ri[i].dado2[0] = '\0';
+        raiz->Pagina->ri[i].dado3[0] = '\0';
     }
     
     for (int i = 0; i < MM + 1; i++) {
@@ -22,54 +23,37 @@ TipoApontador Inicializa (){
 
 // Pesquisa: Arvore B
 
-void Pesquisa(TipoRegistro *x, TipoApontador *Ap){
+void PesquisaBE(TipoRegistro *x, TipoApontador *Ap){
     int i;
     TipoApontador Pag;
     Pag = *Ap;
 
     if((*Ap)->Pt == Interna){
         i = 1;
-        while(i < Pag->UU.U0.ni && x->chave > Pag->UU.U0.ri[i-1])
+        while(i < Pag->Pagina.Interna.ni && x->chave > Pag->Pagina.Interna.ri[i-1])
             i++;
-        if(x->chave < Pag->UU.U0.ri[i-1])
-            Pesquisa(x, &Pag->UU.U0.pi[i-1]);
+        if(x->chave < Pag->Pagina.Interna.ri[i-1])
+            Pesquisa(x, &Pag->Pagina.Interna.pi[i-1]);
             
             else
-                Pesquisa(x, &Pag->UU.U0.pi[i]);
+                Pesquisa(x, &Pag->Pagina.Interna.pi[i]);
         return;
     }
     i = 1;
 
-    while(i < Pag->UU.U1.ne && x->chave > Pag->UU.U1.re[i-1].chave)
+    while(i < Pag->Pagina.Externa.ne && x->chave > Pag->Pagina.Externa.re[i-1].chave)
         i++;
-    if(x->chave == Pag->UU.U1.re[i-1].chave)
-        *x = Pag->UU.U1.re[i-1];
+    if(x->chave == Pag->Pagina.Externa.re[i-1].chave)
+        *x = Pag->Pagina.Externa.re[i-1];
 
         else
             printf("TipoRegistro nao esta presente na arvore\n");
 }
 
-// Caminhamento: Arvore B
+//Inserção: Arvore B*
 
-void Imprime (TipoApontador arvore) {
-    int i=0;
 
-    if (arvore == NULL) 
-        return;
-
-    while (i<= arvore->n){
-        Imprime(arvore->p[i]);
-        
-        if (i != arvore->n)
-            printf("%d ", arvore->r[i].chave);
-        
-        i++;
-    }
-}
-
-//Inserção: Arvore B
-
-void InsereNaPagina (TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir) {
+void InsereNaPaginaExternaBE (TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir) {
     short NaoAchouPosicao;
     int k;
 
@@ -99,7 +83,37 @@ void InsereNaPagina (TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir) {
     Ap->n++;
 }
 
-void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRetorno, TipoApontador *ApRetorno) {
+void InsereNaPaginaInternaBE (TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir) {
+    short NaoAchouPosicao;
+    int k;
+
+    k = Ap->n;      //ERROOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+    NaoAchouPosicao = (k>0);
+
+    while (NaoAchouPosicao) {
+
+        if (Reg.chave >= Ap->r[k-1].chave) {
+            NaoAchouPosicao = false;
+            break;
+        }
+
+        Ap->r[k] = Ap->r[k-1];
+        Ap->p[k+1] = Ap->p[k];
+        k--;
+
+        if(k<1){ 
+            NaoAchouPosicao = false;
+        }
+
+    }
+
+    Ap->r[k] = Reg;
+    Ap->p[k+1] = ApDir;
+    Ap->n++;
+}
+
+void InsBE(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRetorno, TipoApontador *ApRetorno) {
     long i = 1; 
     long j;
     TipoApontador ApTemp;
@@ -159,7 +173,7 @@ void Ins(TipoRegistro Reg, TipoApontador Ap, short *Cresceu, TipoRegistro *RegRe
     *ApRetorno = ApTemp;
 }
 
-void Insere(TipoRegistro Reg, TipoApontador *Ap) {
+void InsereBE(TipoRegistro Reg, TipoApontador *Ap) {
     short Cresceu;
     TipoRegistro RegRetorno;
     TipoPagina *ApRetorno, *ApTemp;
@@ -175,139 +189,3 @@ void Insere(TipoRegistro Reg, TipoApontador *Ap) {
         *Ap = ApTemp; 
     }
 }
-
-//Remoção: Arvore B
-
-void Reconstitui (TipoApontador ApPag, TipoApontador ApPai, int PosPai, short* Diminuiu) {
-    TipoPagina *Aux; 
-    long DispAux, j;
-
-    if (PosPai < ApPai->n) {  //TipoPagina a direita de ApPag   
-    Aux = ApPai->p[PosPai+1]; 
-    DispAux = (Aux->n - M + 1)/2;
-    ApPag->r[ApPag->n] = ApPai->r[PosPai];
-    ApPag->p[ApPag->n + 1] = Aux->p[0];
-    ApPag->n++;
-    
-        if (DispAux > 0) { //Existe folga: transfere de Aux para ApPag
-            for (j=1; j<DispAux; j++){
-                InsereNaPagina(ApPag, Aux -> r[j-1], Aux->p[j]);
-                ApPai->r[PosPai] = Aux->r[DispAux-1];
-                Aux->n -= DispAux;
-                for (j=0; j<Aux->n;j++) Aux->r[j] = Aux->r[j+DispAux];
-                for (j=0; j<=Aux->n; j++) Aux->p[j] = Aux->p[j+DispAux];
-                *Diminuiu = false;
-            }
-        }
-
-        else { //fusao: intercala Aux em  ApPag e libera Aux 
-            for (j=1; j<=M; j++) InsereNaPagina(ApPag, Aux->r[j-1], Aux->p[j]);
-            free (Aux);
-            for (j = PosPai + 1; j < ApPai->n; j++){
-                ApPai->r[j-1] = ApPai->r[j]; ApPai->p[j] = ApPai->p[j+1];
-            }
-            ApPai->n--;
-            
-            if (ApPai->n >= M) *Diminuiu = false;
-        }
-
-    }
-
-    else { //Aux = TipoPagina a esquerda de ApPag  
-        Aux = ApPai->p[PosPai-1];
-        DispAux = (Aux->n - M + 1)/2;
-        
-        for (j = ApPag->n; j >= 1; j--) ApPag->r[j] = ApPag -> r[j-1];
-        
-        ApPag->r[0] = ApPai->r[PosPai-1];
-
-        for (j = ApPag->n; j>= 0; j--) ApPag->p[j+1] = ApPag->p[j];
-
-        ApPag->n++;
-
-        if(DispAux > 0) {//Existe folga: transferencia de Aux para ApPag
-            for (j=1; j< DispAux; j++) InsereNaPagina(ApPag, Aux->r[Aux->n-j], Aux->p[Aux->n - j + 1]);
-
-            ApPag->p[0] = Aux->p[Aux->n - DispAux + 1];
-            ApPai->r[PosPai-1] = Aux->r[Aux->n - DispAux];
-            Aux->n -= DispAux;
-            *Diminuiu = false;
-        }
-
-        else { //Fusão: intercala ApPag em Aux e libea ApPag 
-            for (j=1; j<= M; j++) InsereNaPagina (Aux, ApPag->r[j-1], ApPag->p[j]);
-            free(ApPag);
-            ApPai->n--;
-            
-            if (ApPai->n >= M) *Diminuiu = false;
-        }
-    }
-}
-
-void Antecessor (TipoApontador Ap, int Ind, TipoApontador ApPai, short *Diminuiu) {
-    if (ApPai->p[ApPai->n] != NULL){
-        Antecessor (Ap, Ind, ApPai->p[ApPai->n], Diminuiu);
-        
-        if (*Diminuiu) 
-            Reconstitui(ApPai->p[ApPai->n], ApPai, (long)ApPai->n, Diminuiu);
-    
-        return;
-    }
-    Ap->r[Ind-1] = ApPai->r[ApPai->n-1];
-    ApPai->n--;
-    *Diminuiu = (ApPai->n < M);
-}
-
-void Ret(int Ch, TipoApontador *Ap, short* Diminuiu) {
-    long j, Ind = 1;
-    TipoApontador Pag;
-    
-    if (*Ap == NULL) {
-        printf("Erro: reistro não está na árvore\n");
-        *Diminuiu = false;
-        return;
-    }
-
-    Pag = *Ap;
-    while (Ind < Pag->n && Ch > Pag->r[Ind-1].chave) Ind++;
-
-    if(Ch==Pag->r[Ind-1].chave) {
-        if(Pag->p[Ind-1] ==NULL) { //Tipo pagina folha
-            Pag->n--;
-            *Diminuiu = (Pag->n < M);
-            
-            for(j= Ind; j<= Pag->n; j++) {
-                Pag->r[j-1] = Pag->r[j]; 
-                Pag->p[j] = Pag->p[j+1];
-            }
-
-            return;
-        }
-
-        //TipoPagina não é folha: trocar com antecessor
-        Antecessor (*Ap, Ind, Pag->p[Ind-1], Diminuiu);
-        
-        if (*Diminuiu) Reconstitui(Pag->p[Ind-1], *Ap, Ind - 1, Diminuiu);
-
-        return;
-    }
-
-    if(Ch > Pag->r[Ind-1].chave) Ind ++;
-
-    Ret(Ch, &Pag->p[Ind-1], Diminuiu);
-
-    if(*Diminuiu) Reconstitui(Pag->p[Ind-1], *Ap, Ind-1, Diminuiu);
-}
-
-void Retira (int Ch, TipoApontador *Ap) {
-    short Diminuiu;
-    TipoApontador Aux;
-    Ret(Ch, Ap, &Diminuiu);
-
-    if (Diminuiu && (*Ap)->n ==0) { // Arvore diminui na altura
-        Aux = *Ap;
-        *Ap = Aux->p[0];
-        free(Aux);
-    }
-}
-

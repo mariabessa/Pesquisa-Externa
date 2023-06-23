@@ -25,20 +25,19 @@ TipoApontador Inicializa (){
 void Pesquisa(TipoRegistro *x, TipoApontador Ap){
     long i = 1;
     if (Ap == NULL) {
-        printf("Tipo Registro não esta presente na árvore\n");
+        printf("TipoRegistro não esta presente na árvore\n\nA CHAVE %d NAO FOI ENCONTRADA!\n", x->chave);
         return;
     }
 
 
     while (i < Ap->n && x->chave > Ap->r[i-1].chave) {
-
         i++; // Pesquisa sequencial para se encontrar o intervalo desejado 
     }
 
     if (x->chave == Ap->r[i-1].chave) {
-        printf("\nchave encontrada!\n");
+        printf("\nA CHAVE %d FOI ENCONTRADA!!\n", Ap->r[i-1].chave);
         *x = Ap->r[i-1];
-        printf("Chave esperada:%d Chave encontrada:%d Dado1:%ld\n\n\n", x->chave, Ap->r[i-1].chave, x->dado1);
+        printf("\nChave:%d\nDado 1: 5%ld\nDado 2: %s\nDado 3: %s\n", x->chave, x->dado1, x->dado2, x->dado3);
         return;
     }
 
@@ -47,9 +46,10 @@ void Pesquisa(TipoRegistro *x, TipoApontador Ap){
     }
 
     else{
-        Pesquisa (x, Ap->p[i]);
+        Pesquisa (x, Ap->p[i]);    
     }
 }
+
 
 // Caminhamento: Arvore B
 

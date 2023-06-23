@@ -16,6 +16,8 @@ typedef struct TipoRegistro {
     char dado3[5000];    //cadeia de 5000 caractere 
 } TipoRegistro;
 
+
+
 typedef enum {Interna, Externa} TipoIntExt;
 
 typedef struct TipoPagina* TipoApontador;
@@ -25,36 +27,26 @@ typedef struct TipoPagina {
    union{
         struct {
             int ni;
-            int ri[MM];
-            TipoApontador pi[MM + 1];
-        } U0;
+            int ri[M];
+            TipoApontador pi[M + 1];
+        } Interna;
         struct{
             int ne;
-            TipoRegistro re[MM2].
-        } U1;
-   } UU;
+            TipoRegistro re[MM];
+        } Externa;
+   } Pagina;
 } TipoPagina;
 
 //Inicializar
-TipoApontador Inicializa (); 
+TipoApontador InicializaBE (); 
 
 
 //Pesquisa
-void Pesquisa (TipoRegistro*, TipoApontador*);
-
-//Caminhamento
-void Imprime (TipoApontador);
+void PesquisaBE (TipoRegistro*, TipoApontador*);
 
 //Inserção
-void InsereNaPagina (TipoApontador, TipoRegistro, TipoApontador);
-void Ins(TipoRegistro, TipoApontador, short*, TipoRegistro*, TipoApontador*);
-void Insere(TipoRegistro, TipoApontador*);
-
-
-//Remoção
-void Reconstitui (TipoApontador, TipoApontador, int, short*);
-void Antecessor (TipoApontador, int, TipoApontador, short*);
-void Ret(int, TipoApontador*, short*);
-void Retira (int, TipoApontador*);
+void InsereNaPaginaBE (TipoApontador, TipoRegistro, TipoApontador);
+void InsBE(TipoRegistro, TipoApontador, short*, TipoRegistro*, TipoApontador*);
+void InsereBE(TipoRegistro, TipoApontador*);
 
 #endif 
