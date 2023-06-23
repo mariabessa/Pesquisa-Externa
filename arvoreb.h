@@ -7,6 +7,7 @@
 #define MM 4
 #define M 2
 
+<<<<<<< Updated upstream:arvoreb.h
 typedef long TipoChave;
 
 typedef struct TipoRegistro {
@@ -14,6 +15,13 @@ typedef struct TipoRegistro {
 
 //     chave (valor inteiro), dado1 (valor inteiro longo), dado2 (cadeia de 1000
 // caracteres), dado3 (cadeia de 5000 caracteres). N
+=======
+typedef struct TipoRegistro {
+    int chave;   //valor inteiro 
+    long int dado1;  //valor inteiro longo 
+    char dado2[1000];    //cadeia de 1000 caracteres 
+    char dado3[5000];    //cadeia de 5000 caractere 
+>>>>>>> Stashed changes:Pesquisa-Externa-version-1.0.5/arvoreb.h
 } TipoRegistro;
 
 typedef struct TipoPagina* TipoApontador;

@@ -14,6 +14,7 @@ char* generateRandomString(int tam) {
     for(int i = 0; i < tam - 1; i++)
         dado[i] = string[rand()%stringLen];
     
+    free (dado);
     return dado;
 }
 

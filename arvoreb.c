@@ -49,7 +49,12 @@ void InsereNaPagina (TipoApontador Ap, TipoRegistro Reg, TipoApontador ApDir) {
     short NaoAchouPosicao;
     int k;
 
+<<<<<<< Updated upstream:arvoreb.c
     k = Ap->n;
+=======
+    k = Ap->n;  
+
+>>>>>>> Stashed changes:Pesquisa-Externa-version-1.0.5/arvoreb.c
     NaoAchouPosicao = (k>0);
 
     while (NaoAchouPosicao) {
