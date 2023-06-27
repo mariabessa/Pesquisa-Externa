@@ -2,16 +2,11 @@
 # define ASI_h
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include "item.h"
 #define ITENSPORPAGINA 2
 
-typedef struct{
-    int chave;
-    long int dado1;
-    char dado2[1000];
-    char dado3[5000];
-}Item;
-
-int acessoSequencialIndexado(Item *, FILE*);
-int pesquisa(int*, int, int, Item *, FILE *);
+int acessoSequencialIndexado(Item *, FILE*, Analise*);
+int pesquisa(int*, int, int, Item *, FILE *, int*);
 
 # endif
