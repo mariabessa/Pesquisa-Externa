@@ -9,6 +9,7 @@
 #define MM 4
 #define M 2
 
+
 typedef enum {Interna, Externa} TipoIntExt;
 
 typedef struct TipoPaginaBE* TipoApontadorBE;

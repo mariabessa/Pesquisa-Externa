@@ -28,6 +28,7 @@ void Pesquisa (Item*, TipoApontador, int*);
 //Caminhamento
 void Imprime (TipoApontador);
 
+
 //Inserção
 void InsereNaPagina (TipoApontador, Item, TipoApontador, int*);
 void Ins(Item, TipoApontador, short*, Item*, TipoApontador*, int*);

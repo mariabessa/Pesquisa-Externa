@@ -6,6 +6,7 @@
 #include "item.h"
 #define ITENSPORPAGINA 2
 
+
 int acessoSequencialIndexado(Item *, FILE*, Analise*);
 int pesquisa(int*, int, int, Item *, FILE *, int*);
 

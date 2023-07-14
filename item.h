@@ -8,7 +8,6 @@ typedef struct {
     char dado3[5000];
 }Item;
 
-
 typedef struct Analise {
     int insercaoComp, pesquisaComp, insercaoTransf, pesquisaTransf;
     double insercaoTemp, pesquisaTemp;

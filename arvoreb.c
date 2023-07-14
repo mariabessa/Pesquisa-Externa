@@ -106,6 +106,7 @@ void Ins(Item Reg, TipoApontador Ap, short *Cresceu, Item *RegRetorno, TipoApont
         *comp += 1;
     }
 
+
     *comp += 1;
     
     if(Reg.chave == Ap->r[i-1].chave){

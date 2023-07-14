@@ -190,6 +190,7 @@ void InsereNaPaginaBstar(TipoApontadorBE Ap, Item Reg, short *Cresceu, Item *Reg
         
         InsereNaPaginaBstar(Ap->Pagina.Interna.pi[i], Reg, Cresceu, RegRetorno, ApRetorno, comp);
 
+
         if(!*Cresceu) 
             return ;
 

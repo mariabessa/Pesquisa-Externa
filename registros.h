@@ -3,6 +3,7 @@
 #define ITENSPAGINA 4
 #define MAXTABELA 250
 
+
 typedef struct{
     int indice; //menor valor que identifica a pagina
 }Pagina;

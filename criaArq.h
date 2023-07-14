@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "item.h"
 
+
 char* generateRandomString(int);
 void arquivo(int, int);
 

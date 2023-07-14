@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     if (opcode == 1)  { 
         Item Reg;
 
-       if(ArgOpcional){ 
+    if(ArgOpcional){ 
             for (int i = 0; i < qtdRegistros; i++){
                 fread(&Reg, sizeof(Reg), 1, arq); 
                 printf("Chave %d = %d\n", i, Reg.chave);

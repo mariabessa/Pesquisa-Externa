@@ -43,6 +43,7 @@ int acessoSequencialIndexado( Item *itemProcurado, FILE * arq, Analise *analise)
     analise->pesquisaTransf = 0;
     analise->pesquisaComp = comp;
 
+
     fclose(arq);
     free(tabela);
     return 1;

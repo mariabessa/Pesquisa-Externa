@@ -7,6 +7,7 @@
 #include "arvoreBinaria.h"
 
 
+
 bool binaryTree(FILE *arquivoRegistros, int archiveSize, Registros *itemProcurado, bool optionalFunction, int *compInserction, int *transferInserction, double *timeInserction, int *compSearch, int *transferSearch, double *timeSearch){
     if(arquivoRegistros == NULL){ //verificando se o arquivo pode ser aberto.
         return false;
@@ -16,6 +17,7 @@ bool binaryTree(FILE *arquivoRegistros, int archiveSize, Registros *itemProcurad
     if(arquivoArvore == NULL){
         return false;
     }
+
 
     Registros currentlyItem;
     RegArvore dadoArvore;

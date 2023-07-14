@@ -27,8 +27,7 @@ void arquivo(int qtdRegistros, int situacao){
     if((arquivo = fopen("arquivo.txt", "w")) == NULL) {
         puts("Arquivo nao pode ser aberto...");
         return;
-    }
-    if((arquivoBin = fopen("arquivo.bin", "wb+")) == NULL) {
+    }if((arquivoBin = fopen("arquivo.bin", "wb+")) == NULL) {
         puts("Arquivo nao pode ser aberto...");
         return;
     }

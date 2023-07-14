@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include "item.h"
 
+
 typedef Item Registros;
 
 typedef struct{
